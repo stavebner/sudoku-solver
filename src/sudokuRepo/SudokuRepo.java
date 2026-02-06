@@ -28,13 +28,20 @@ public class SudokuRepo {
     private void initBoards() {
         boards = new ArrayList<>();
 
+        List<RuleOptions> basicRules = new ArrayList<>();
+        basicRules.add(RuleOptions.BASIC_RULES);
+
+        List<RuleOptions> antiKnight = new ArrayList<>();
+        antiKnight.add(RuleOptions.BASIC_RULES);
+        antiKnight.add(RuleOptions.ANTI_KNIGHT);
+
         int[][] fourByFour1 = {
                 {0, 0, 0, 4},
                 {0, 0, 0, 0},
                 {2, 0, 0, 3},
                 {4, 0, 1, 2}
         };
-        boards.add(new SudokuBoard(fourByFour1));
+        boards.add(new SudokuBoard(fourByFour1, basicRules));
 
         int[][] fourByFour2 = {
                 {1, 2, 0, 4},
@@ -42,8 +49,8 @@ public class SudokuRepo {
                 {0, 0, 4, 2},
                 {0, 0, 0, 0}
         };
-        boards.add(new SudokuBoard(fourByFour2));
-
+        boards.add(new SudokuBoard(fourByFour2, basicRules));
+/*
         int[][] nineByNine1 = {
                 {0, 9, 0, 8, 6, 5, 2, 0, 0},
                 {0, 0, 5, 0, 1, 2, 0, 6, 8},
@@ -55,7 +62,7 @@ public class SudokuRepo {
                 {2, 4, 0, 1, 7, 0, 5, 0, 0},
                 {0, 0, 7, 2, 8, 3, 0, 9, 0}
         };
-        boards.add(new SudokuBoard(nineByNine1));
+        boards.add(new SudokuBoard(nineByNine1, basicRules));
 
         int[][] nineByNine2 = {
                 {0, 0, 7, 0, 0, 1, 0, 0, 5},
@@ -68,8 +75,8 @@ public class SudokuRepo {
                 {7, 5, 2, 0, 0, 4, 6, 0, 0},
                 {1, 0, 0, 2, 0, 0, 7, 0, 0}
         };
-        boards.add(new SudokuBoard(nineByNine2));
-/*
+        boards.add(new SudokuBoard(nineByNine2, basicRules));
+
         int[][] nineByNine3 = {
                 {0, 9, 5, 0, 0, 0, 0, 0, 0},
                 {0, 6, 0, 0, 9, 0, 0, 0, 0},
@@ -179,6 +186,21 @@ public class SudokuRepo {
                 {0, 0, 0, 7, 10, 0, 13, 2, 9, 12, 0, 4, 15, 0, 0, 0},
                 {0, 0, 0, 13, 0, 12, 0, 0, 0, 0, 15, 0, 10, 0, 0, 0}
         };
-        boards.add(new SudokuBoard(sixteenBySixteen1));
+        boards.add(new SudokuBoard(sixteenBySixteen1, basicRules));
+
+
+
+        int[][] nineByNine10 = {
+                {7, 0, 5, 0, 0, 2, 0, 0, 0},
+                {0, 4, 0, 7, 0, 6, 9, 0, 0},
+                {8, 0, 0, 9, 0, 0, 0, 0, 0},
+                {2, 7, 0, 3, 1, 0, 0, 8, 6},
+                {4, 0, 0, 0, 0, 0, 0, 2, 0},
+                {5, 0, 8, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 1, 0, 6, 3},
+                {0, 0, 0, 0, 0, 0, 0, 7, 0},
+                {0, 0, 7, 0, 0, 0, 0, 9, 0}
+        };
+        boards.add(new SudokuBoard(nineByNine10, antiKnight));
     }
 }
