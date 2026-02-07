@@ -1,3 +1,4 @@
+import sudokuRepo.RuleOptions;
 import sudokuRepo.SudokuBoard;
 import sudokuRepo.SudokuRepo;
 
@@ -8,7 +9,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        SudokuBoard mat = new SudokuRepo().getRandomBoard(9);
+        SudokuRepo sudokuRepo = new SudokuRepo();
+        SudokuBoard mat = sudokuRepo.getRandomBoard(RuleOptions.BASIC_RULES);
 
         mat.printSudoku();
         mat.getRules().forEach(ruleOptions -> System.out.print(ruleOptions.name() + ", "));

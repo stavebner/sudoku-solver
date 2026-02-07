@@ -46,7 +46,7 @@ public enum RuleOptions {
         return true;
     });
 
-    private Rule rule;
+    private final Rule rule;
 
     RuleOptions(Rule rule) {
         this.rule = rule;

@@ -1,24 +1,40 @@
 package sudokuRepo;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.util.Set;
 
 public class SudokuBoard {
     private final int[][] grid;
 
-    private final List<RuleOptions> rules;
+    private final Set<RuleOptions> rules;
 
-    public SudokuBoard(int[][] grid, List<RuleOptions> rules) {
+    public SudokuBoard(int[][] grid, RuleOptions... rules) {
         this.grid = copy(grid);
-        this.rules = rules;
+
+        // create set from varargs
+        Set<RuleOptions> ruleSet = EnumSet.noneOf(RuleOptions.class);
+        ruleSet.addAll(List.of(rules));
+
+        // always enforce BASIC_RULES
+        ruleSet.add(RuleOptions.BASIC_RULES);
+
+        this.rules = ruleSet;
     }
+
+    public SudokuBoard(int[][] grid) {
+        this.grid = copy(grid);
+        this.rules = EnumSet.of(RuleOptions.BASIC_RULES);
+    }
+
+    public Set<RuleOptions> getRules() {
+        return rules;
+    }
+
 
     public int getBoardSize() {
         return grid.length;
-    }
-
-    public List<RuleOptions> getRules() {
-        return rules;
     }
 
     public int[][] getGrid() {
@@ -63,7 +79,7 @@ public class SudokuBoard {
         int[][] mat = getGrid();
         sudokuSolver(mat, 0, 0);
 
-        return new SudokuBoard(mat, rules);
+        return new SudokuBoard(mat, this.rules.toArray(new RuleOptions[this.rules.size()]));
     }
 
     private boolean sudokuSolver(int[][] mat, int row, int col) {
